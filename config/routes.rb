@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'loan_profit#new'
 
   get 'loan_profit/new', to: 'loan_profit#new'
-  get 'loan_profit/show', to: 'loan_profit#show'
+  get 'loan_profit/show/:id', to: 'loan_profit#show', as: 'loan_profit_show'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

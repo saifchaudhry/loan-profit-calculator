@@ -7,7 +7,7 @@ class LoanProfitController < ApplicationController
 
     if loan_profit.save!
       # profit = LoanProft::CalculateProfitService.new(calculator_params).call
-      redirect_to loan_profit_show_path(id: loan_profit.id, profit: profit), notice: 'Record was successfully created.'
+      redirect_to loan_profit_show_path(loan_profit), notice: 'Record was successfully created.'
     end
   end
 
@@ -17,7 +17,7 @@ class LoanProfitController < ApplicationController
 
   def show
     @loan_profit = LoanProfit.find(params[:id])
-    @profit = LoanProft::CalculateProfitService.new(calculator_params).call
+    @profit = Loan::CalculateProfitService.new(@loan_profit).call
     # @profit = params[:profit]
   end
 
