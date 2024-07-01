@@ -1,0 +1,10 @@
+<div class="flex items-center justify-center min-h-screen">
+  <div class="text-center">
+    <h1 class="text-2xl font-semibold mb-4">Thanks, <%= @loan_profit.full_name %><span class="text-gray-900">name</span>! Here are those figures we promised.</h1>
+    <p class="text-lg mb-6">And again, check your email for the Longleaf term sheet.</p>
+    <div class="text-gray-700 mt-8">
+      <p class="text-xl">Your Estimated Profit: <span class="font-bold">$<%= @profit[:estimated_profit] %></span></p>
+      <p class="text-xl">Return Rate: <span class="font-bold"><%= @profit[:return_rate] %>%</span></p>
+    </div>
+  </div>
+</div>

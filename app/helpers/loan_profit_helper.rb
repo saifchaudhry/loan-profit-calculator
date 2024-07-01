@@ -1,0 +1,2 @@
+module LoanProfitHelper
+end

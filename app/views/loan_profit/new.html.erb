@@ -1,0 +1,96 @@
+<!-- app/views/loan_requests/_form.html.erb -->
+
+<div class="custom-app-color text-white py-4">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl font-semibold font-bold">Request a Loan</h2>
+  </div>
+</div>
+
+<div class="flex items-center justify-center min-h-screen">
+  <div class="my-2 w-full sm:w-10/12 md:w-8/12 lg:w-7/12 xl:w-6/12 bg-white p-8 shadow-md rounded-lg">
+    <%= form_with(model: @loan_profit, url: loan_profit_create_path, method: :post, local: true, class: "space-y-1 bg-gray-100 p-6 shadow-md rounded-md") do |form| %>
+
+      <%= form.label :target_property, 'Target Property*', class: "block text-md font-medium" %>
+      <span class="font-medium text-xs block md:inline-block md:ml-0 md:mt-1"> (Address, City, State, & Zip for your target property) </span>
+      <%= form.text_field :target_property, required: true, class: "mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+
+      <%= form.label :loan_term, 'Loan Term*', class: "block text-md font-medium" %>
+      <span class="font-medium text-xs block md:inline-block md:ml-0 md:mt-1">(How many months do you want the loan for, up to 12)? </span>
+      <%= form.number_field :loan_term, required: true, min: 1, max: 12, step: 1, class: "mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", oninput: "restrictToPositiveIntegers(event)" %>
+      <small id="loan_term_error" class="text-red-600" aria-live="polite"></small>
+
+      <%= form.label :purchase_price, 'Purchase Price*', class: "block text-md font-medium" %>
+      <span class="font-medium text-xs block md:inline-block md:ml-0 md:mt-1" >
+        What are you purchasing the property for? Please include any assignment fee.
+        <br>
+        *Our sample term sheet will set a maximum loan-to-cost of 90%.
+      </span>
+      <%= form.number_field :purchase_price, required: true, min: 1, class: "mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", oninput: "restrictToPositiveIntegers(event)" %>
+      <small id="purchase_price_error" class="text-red-600 flex items-center" aria-live="polite"></small>
+
+      <%= form.label :estimated_budget_repair, 'Estimated Repair Budget*', class: "block text-md font-medium" %>
+      <span class="font-medium text-xs block md:inline-block md:ml-0 md:mt-1">
+        (Full budget expected to rehab the property.)
+      </span>
+      <%= form.number_field :estimated_budget_repair, required: true, min: 1, class: "mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", oninput: "restrictToPositiveIntegers(event)" %>
+      <small id="repair_budget_error" class="text-red-600 flex items-center" aria-live="polite"></small>
+
+      <%= form.label :after_repair_value, 'After Repair Value*', class: "block text-md font-medium" %>
+      <span class="font-medium text-xs block md:inline-block md:ml-0 md:mt-1">
+        What do you think the property's market value will be when you complete the rehab?
+        <br>
+        *Our sample term sheet will set a maximum loan-to-value of 70%
+      </span>
+      <%= form.number_field :after_repair_value, required: true, min: 1, class: "mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", oninput: "restrictToPositiveIntegers(event)" %>
+      <small id="after_repair_value_error" class="text-red-600 flex items-center" aria-live="polite"></small>
+
+      <%= form.label :first_name, 'First Name', class: "block text-md font-medium" %>
+      <%= form.text_field :first_name, required: true, class: "mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+
+      <%= form.label :last_name, 'Last Name', class: "block text-md font-medium" %>
+      <%= form.text_field :last_name, class: "mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+
+      <%= form.label :email, 'Email', class: "block text-md font-medium" %>
+      <%= form.email_field :email, required: true, class: "mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %>
+
+      <%= form.label :phone_number, 'Phone', class: "block text-md font-medium" %>
+     
+
+      <div class="mt-2 flex">
+        <div class="relative">
+          <%= form.select :country_code, options_for_select([["+1 (US)", "+1"]]), { prompt: 'Select country code' }, required: true, class: 'rounded-l-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' %>
+        </div>
+        <div class="relative flex-1 ml-2">
+          <%= form.text_field :phone_number, required: true, class: "block w-full rounded-r-md border border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm", inputmode: "numeric",
+            pattern: '\d{3}-?\d{3}-?\d{4}', placeholder: "Enter phone number (e.g., 123-456-7890 or 1234567890)" %>
+        </div>
+      </div>
+
+
+
+      <div class="my-4">
+        <%= form.submit "Submit", class: "mt-6 flex w-full justify-center rounded-md custom-button-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:custom-button-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<script>
+  // Function to allow only positive integers in number fields
+    function restrictToPositiveIntegers(event) {
+      const inputValue = event.target.value;
+      // Remove any non-digit characters
+      const sanitizedValue = inputValue.replace(/[^\d]/g, '');
+      // Update the field value
+      event.target.value = sanitizedValue;
+
+      // Show error if input is not a positive integer
+      const errorElement = document.getElementById(`${event.target.id}_error`);
+      if (!/^[1-9]\d*$/.test(sanitizedValue)) {
+        errorElement.textContent = "Numbers only please";
+      } else {
+        errorElement.textContent = "";
+      }
+    }
+</script>
