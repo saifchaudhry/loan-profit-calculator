@@ -2,13 +2,13 @@
 
 <div class="custom-app-color text-white py-4">
   <div class="container mx-auto px-4">
-    <h2 class="text-2xl font-semibold font-bold">Request a Loan</h2>
+    <h2 class="text-2xl font-semibold font-bold">Real Estate Profit and Return Calculator</h2>
   </div>
 </div>
 
 <div class="flex items-center justify-center min-h-screen">
   <div class="my-2 w-full sm:w-10/12 md:w-8/12 lg:w-7/12 xl:w-6/12 bg-white p-8 shadow-md rounded-lg">
-    <%= form_with(model: @loan_profit, url: loan_profit_create_path, method: :post, local: true, class: "space-y-1 bg-gray-100 p-6 shadow-md rounded-md") do |form| %>
+    <%= form_with(model: @loan_application, url: loan_application_create_path, method: :post, local: true, class: "space-y-1 bg-gray-100 p-6 shadow-md rounded-md") do |form| %>
 
       <%= form.label :target_property, 'Target Property*', class: "block text-md font-medium" %>
       <span class="font-medium text-xs block md:inline-block md:ml-0 md:mt-1"> (Address, City, State, & Zip for your target property) </span>

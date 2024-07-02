@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_06_28_084827) do
-  create_table "loan_profit_calculators", force: :cascade do |t|
+  create_table "loan_applications", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -20,12 +20,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_084827) do
     t.integer "purchase_price"
     t.integer "estimated_budget_repair"
     t.integer "after_repair_value"
+    t.integer "loan_amount"
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "loan_profits", force: :cascade do |t|
+  create_table "loan_profit_calculators", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"

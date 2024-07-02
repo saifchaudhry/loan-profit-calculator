@@ -7,6 +7,7 @@ module Loan
 			@purchase_price = loan_profit.purchase_price
 			@estimated_budget_repair = loan_profit.estimated_budget_repair
 			@after_repair_value = loan_profit.after_repair_value
+			@loan_amount = loan_profit.loan_amount
 		end
 
 		def call
@@ -18,15 +19,10 @@ module Loan
 
 		private
 
-			attr_reader :loan_term, :purchase_price, :estimated_budget_repair, :after_repair_value
+			attr_reader :loan_term, :purchase_price, :estimated_budget_repair, :after_repair_value, :loan_amount
 
 			def estimated_profit
-				debugger
 				@estimated_profit ||= (after_repair_value - loan_amount - total_interest_expense).round(2)
-			end
-
-			def loan_amount
-				@loan_amount ||= [max_loan_amount_by_purchase_price, max_loan_amount_by_arv].min
 			end
 
 			def total_interest_expense
@@ -35,14 +31,6 @@ module Loan
 
 			def total_expense
 				loan_amount + total_interest_expense
-			end
-
-			def max_loan_amount_by_purchase_price
-				0.90 * purchase_price
-			end
-
-			def max_loan_amount_by_arv
-				0.70 * after_repair_value
 			end
 
 			def return_rate

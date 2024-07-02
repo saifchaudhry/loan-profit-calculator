@@ -1,4 +1,4 @@
-class LoanProfit < ApplicationRecord
+class LoanApplication < ApplicationRecord
 	# Extesnsions
 	strip_attributes
 
@@ -17,7 +17,14 @@ class LoanProfit < ApplicationRecord
 	  message: "should be a valid phone number"
 	}
 
+	# callbacks
+	before_save :assign_loan_amount
+
 	def full_name
 		"#{first_name} #{last_name}"
+	end
+
+	def assign_loan_amount
+		self.loan_amount = [(0.90 * purchase_price), (0.70 * after_repair_value)].min
 	end
 end
