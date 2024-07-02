@@ -2,12 +2,12 @@ module Loan
 	class CalculateProfitService
 		MONTHLY_INTEREST = 0.13/12
 
-		def initialize(loan_profit)
-			@loan_term = loan_profit.loan_term
-			@purchase_price = loan_profit.purchase_price
-			@estimated_budget_repair = loan_profit.estimated_budget_repair
-			@after_repair_value = loan_profit.after_repair_value
-			@loan_amount = loan_profit.loan_amount
+		def initialize(loan_application)
+			@loan_term = loan_application.loan_term
+			@purchase_price = loan_application.purchase_price
+			@estimated_budget_repair = loan_application.estimated_budget_repair
+			@after_repair_value = loan_application.after_repair_value
+			@loan_amount = loan_application.loan_amount
 		end
 
 		def call

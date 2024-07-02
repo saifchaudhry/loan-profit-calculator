@@ -66,10 +66,8 @@
         </div>
       </div>
 
-
-
       <div class="my-4">
-        <%= form.submit "Submit", class: "mt-6 flex w-full justify-center rounded-md custom-button-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:custom-button-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" %>
+        <%= form.submit "Calculate Profit", class: "mt-6 flex w-full justify-center rounded-md custom-button-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:custom-button-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" %>
       </div>
     <% end %>
   </div>
@@ -77,6 +75,7 @@
 
 
 <script>
+
   // Function to allow only positive integers in number fields
     function restrictToPositiveIntegers(event) {
       const inputValue = event.target.value;

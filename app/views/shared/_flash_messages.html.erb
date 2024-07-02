@@ -1,0 +1,21 @@
+<!-- app/views/shared/_flash_messages.html.erb -->
+<% flash.each do |type, message| %>
+  <div class="<%= flash_class(type) %> px-4 py-3 rounded relative alert-dismissible" role="alert">
+    <strong class="font-bold"><%= flash_title(type) %></strong>
+    <span class="block sm:inline"><%= message %></span>
+    <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" onclick="this.parentElement.remove()">
+      <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <title>Close</title>
+        <path d="M14.36 5.64a.75.75 0 0 0-1.06 0L10 8.94 6.7 5.64a.75.75 0 0 0-1.06 1.06L8.94 10l-3.3 3.3a.75.75 0 1 0 1.06 1.06L10 11.06l3.3 3.3a.75.75 0 0 0 1.06-1.06L11.06 10l3.3-3.3a.75.75 0 0 0 0-1.06z"/>
+      </svg>
+    </button>
+  </div>
+<% end %>
+
+<script>
+  setTimeout(function() {
+    document.querySelectorAll('.alert-dismissible').forEach(function(alert) {
+      alert.remove();
+    });
+  }, 3000);
+</script>

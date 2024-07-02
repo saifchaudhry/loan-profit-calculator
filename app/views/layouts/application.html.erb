@@ -9,7 +9,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
 
     <style type="text/tailwindcss">
       @layer utilities {
@@ -21,6 +21,7 @@
   </head>
 
   <body class="bg-custom-light-gray">
+    <%= render 'shared/flash_messages' %>
     <%= yield %>
   </body>
 </html>
