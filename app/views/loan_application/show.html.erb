@@ -3,8 +3,11 @@
     <h1 class="text-2xl font-semibold mb-4">Thanks, <%= @loan_application.full_name %><span class="text-gray-900"></span>! Here are those figures we promised.</h1>
     <p class="text-lg mb-6">And again, check your email for the Longleaf term sheet.</p>
     <div class="text-gray-700 mt-8">
-      <p class="text-xl">Your Estimated Profit: <span class="font-bold">$<%= @loan_application.estimated_profit %></span></p>
+      <p class="text-xl">Your Estimated Profit: <span class="font-bold">£ <%= @loan_application.estimated_profit %></span></p>
       <p class="text-xl">Return Rate: <span class="font-bold"><%= @loan_application.return_rate %>%</span></p>
+    </div>
+    <div class="mt-8">
+      <%= button_to 'Calculate Again!', loan_application_new_path, method: :get, class: "py-2.5 px-5 me-2 mb-2 text-sm font-medium justify-center rounded-md custom-button-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:custom-button-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"%>
     </div>
   </div>
 </div>
