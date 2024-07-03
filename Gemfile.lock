@@ -163,6 +163,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
+    pg (1.5.6)
     psych (5.1.2)
       stringio
     public_suffix (6.0.0)
@@ -255,12 +256,6 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    sqlite3 (1.7.3-aarch64-linux)
-    sqlite3 (1.7.3-arm-linux)
-    sqlite3 (1.7.3-arm64-darwin)
-    sqlite3 (1.7.3-x86-linux)
-    sqlite3 (1.7.3-x86_64-darwin)
-    sqlite3 (1.7.3-x86_64-linux)
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.1)
@@ -305,6 +300,7 @@ DEPENDENCIES
   factory_bot_rails
   importmap-rails
   jbuilder
+  pg (~> 1.5.6)
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.4)
   rails-controller-testing
@@ -313,7 +309,6 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   sprockets-rails
-  sqlite3 (~> 1.4)
   stimulus-rails
   strip_attributes (~> 1.13)
   turbo-rails
@@ -321,7 +316,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.3.1p55
+   ruby 3.2.1p31
 
 BUNDLED WITH
    2.5.11

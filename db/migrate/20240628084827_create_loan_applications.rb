@@ -11,6 +11,9 @@ class CreateLoanApplications < ActiveRecord::Migration[7.1]
       t.integer :after_repair_value
       t.integer :loan_amount
       t.string :phone_number
+      t.string :country_code
+      t.decimal :return_rate
+      t.decimal :estimated_profit
 
       t.timestamps
     end

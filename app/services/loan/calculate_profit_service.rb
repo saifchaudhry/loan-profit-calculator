@@ -4,8 +4,6 @@ module Loan
 
 		def initialize(loan_application)
 			@loan_term = loan_application.loan_term
-			@purchase_price = loan_application.purchase_price
-			@estimated_budget_repair = loan_application.estimated_budget_repair
 			@after_repair_value = loan_application.after_repair_value
 			@loan_amount = loan_application.loan_amount
 		end
@@ -19,7 +17,7 @@ module Loan
 
 		private
 
-			attr_reader :loan_term, :purchase_price, :estimated_budget_repair, :after_repair_value, :loan_amount
+			attr_reader :loan_term, :after_repair_value, :loan_amount
 
 			def estimated_profit
 				@estimated_profit ||= (after_repair_value - loan_amount - total_interest_expense).round(2)
