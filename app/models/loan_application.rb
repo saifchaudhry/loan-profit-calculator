@@ -22,6 +22,7 @@ class LoanApplication < ApplicationRecord
 
 	# callbacks
 	before_save :initiate_loan_and_profit
+	after_commit :send_email, on: :create
 
 	def full_name
 		"#{first_name} #{last_name}"
@@ -44,5 +45,9 @@ class LoanApplication < ApplicationRecord
 
 	def phone_number_with_country_code
 		"#{country_code}#{phone_number}"
+	end
+
+	def send_email
+    LoanApplicationMailer.estimated_profit_mail(self.id).deliver_later
 	end
 end
