@@ -6,6 +6,9 @@ ruby "3.2.1"
 # Models
 gem 'strip_attributes', '~> 1.13'
 
+# Integrations
+gem 'wicked_pdf', '~> 2.8'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 
@@ -57,6 +60,8 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem 'rspec-rails'
+  gem 'letter_opener', '~> 1.10'
+  gem "wkhtmltopdf-binary"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

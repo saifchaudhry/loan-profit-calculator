@@ -38,7 +38,7 @@ class LoanApplication < ApplicationRecord
 	def initiate_loan_and_profit
 		self.loan_amount = [max_loan_on_purchase_price, max_loan_on_arv].min
 		calculated_proft = Loan::CalculateProfitService.new(self).call
-		self.estimated_profit = calculated_proftc[:estimated_profit]
+		self.estimated_profit = calculated_proft[:estimated_profit]
 		self.return_rate = calculated_proft[:return_rate]
 	end
 

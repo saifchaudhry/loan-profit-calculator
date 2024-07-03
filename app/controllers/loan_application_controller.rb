@@ -5,6 +5,7 @@ class LoanApplicationController < ApplicationController
     @loan_application = LoanApplication.new(loan_application_params)
 
     if @loan_application.save
+      LoanApplicationMailer.estimated_profit_mail(@loan_application).deliver
       flash[:success] = ['Loan application was successfully created.']
       redirect_to loan_application_show_path(@loan_application)
     else

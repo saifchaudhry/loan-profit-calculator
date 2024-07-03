@@ -1,0 +1,9 @@
+<div class="flex items-center justify-center min-h-screen">
+  <div class="text-center">
+    <h1 class="text-2xl font-semibold mb-4">Thanks, <%= @loan_application.full_name %><span class="text-gray-900"></span>! Here are those figures we promised.</h1>
+    <div class="text-gray-700 mt-8">
+      <p class="text-xl">Your Estimated Profit: <span class="font-bold">$<%= @loan_application.estimated_profit %></span></p>
+      <p class="text-xl">Return Rate: <span class="font-bold"><%= @loan_application.return_rate %>%</span></p>
+    </div>
+  </div>
+</div>
