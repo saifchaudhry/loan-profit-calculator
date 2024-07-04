@@ -51,6 +51,8 @@ services:
     command: bundle exec sidekiq -C config/sidekiq.yml
 
   redis:
-    image: redis:6.0
+    image: "redis:7-alpine"
     ports:
-      - "6379:6379" 
+      - 6379
+    volumes:
+    - ./tmp/redis_data:/var/lib/redis/data

@@ -1,9 +1,6 @@
 # Loan Application Calculator README
 =======================
 
-# Setup Using Docker
-	docker-compose up --build
-
 # Manual local Setup
 	1. Install Ruby 3.2.1
 	2. bundle install
@@ -29,7 +26,7 @@
 
 	Upon creation of LoanApplication. I'm sending email to user that have PDF attached.
 
-	Created a calculator Service for calculation of profit:
+# Created a calculator Service for calculation of profit:
 	You can find the service here: app/services/loan/calculate_profit_service.rb
 	Spec for service can be found here: spec/services/calculate_profit_service_spec.rb
 
