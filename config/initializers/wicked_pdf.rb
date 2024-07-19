@@ -11,7 +11,8 @@
 WickedPdf.configure do |config|
   WickedPdf.config ||= {}
 WickedPdf.config.merge!({
-  layout: 'pdf'
+  layout: 'pdf',
+  exe_path: Rails.root.join('bin', 'wkhtmltopdf-i386').to_s
 }) 
   # Path to the wkhtmltopdf executable: This usually isn't needed if using
   # one of the wkhtmltopdf-binary family of gems.
