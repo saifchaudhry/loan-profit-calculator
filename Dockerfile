@@ -14,19 +14,8 @@ ENV RAILS_ENV="development" \
     LAUNCHY_DRY_RUN=true \
     BROWSER=/dev/null
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y \
-    bash \
-    build-essential \
-    git \
-    libvips \
-    libpq-dev \
-    pkg-config \
-    redis \
+    apt-get install -y \
     wget \
     fontconfig \
     libfreetype6 \
@@ -39,7 +28,6 @@ RUN apt-get update -qq && \
     xfonts-75dpi \
     xfonts-base
 
-
 RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb && \
     dpkg -i wkhtmltox_0.12.5-1.stretch_amd64.deb && \
     apt-get -f install -y && \
@@ -47,6 +35,21 @@ RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkh
 
 
 ENTRYPOINT ["wkhtmltopdf"]
+
+# Throw-away build stage to reduce size of final image
+FROM base as build
+
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    bash \
+    build-essential \
+    git \
+    libvips \
+    libpq-dev \
+    pkg-config \
+    redis
+
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
