@@ -7,19 +7,46 @@ FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 # Rails app lives here
 WORKDIR /rails
 
-# Set production environment
-ENV RAILS_ENV="production" \
+# Set development environment
+ENV RAILS_ENV="development" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
-
+    LAUNCHY_DRY_RUN=true \
+    BROWSER=/dev/null
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips libpq-dev pkg-config redis
+    apt-get install --no-install-recommends -y \
+    bash \
+    build-essential \
+    git \
+    libvips \
+    libpq-dev \
+    pkg-config \
+    redis \
+    wget \
+    fontconfig \
+    libfreetype6 \
+    libjpeg62-turbo \
+    libpng16-16 \
+    libx11-6 \
+    libxcb1 \
+    libxext6 \
+    libxrender1 \
+    xfonts-75dpi \
+    xfonts-base
+
+
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb && \
+    dpkg -i wkhtmltox_0.12.5-1.stretch_amd64.deb && \
+    apt-get -f install -y && \
+    rm wkhtmltox_0.12.5-1.stretch_amd64.deb
+
+
+ENTRYPOINT ["wkhtmltopdf"]
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -28,6 +55,7 @@ RUN bundle install
 # Copy application code
 COPY . .
 RUN chmod +x /rails/bin/docker-entrypoint.sh
+
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/

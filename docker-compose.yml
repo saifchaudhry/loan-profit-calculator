@@ -4,59 +4,60 @@ volumes:
   sidekiq_data: {}
 
 services:
-
   postgres:
     image: postgres:alpine
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: development_loan_profit_calculator
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-development_loan_profit_calculator}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - "5432:5432"
 
   web:
-    build: .
-    image: loan-calculator
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     ports:
       - "3000:3000"
     environment:
       RAILS_ENV: ${RAILS_ENV:-development}
-      DATABASE_HOST: postgres
-      DATABASE_USER: postgres
-      DATABASE_PASSWORD: postgres
-      DATABASE_NAME: development_loan_profit_calculator
-      DATABASE_PORT: 5432
+      DATABASE_HOST: ${DATABASE_HOST:-postgres}
+      DATABASE_USER: ${DATABASE_USER:-postgres}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-postgres}
+      DATABASE_NAME: ${DATABASE_NAME:-development_loan_profit_calculator}
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
+    volumes:
+      - .:/rails:cached
     depends_on:
       - postgres
       - redis
       - worker
 
   worker:
-    build: .
-    image: loan-calculator
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: bundle exec sidekiq -C config/sidekiq.yml
     depends_on:
       - postgres
       - redis
-    env_file:
-      - .env
     environment:
       RAILS_ENV: ${RAILS_ENV:-development}
-      DATABASE_HOST: postgres
-      DATABASE_USER: postgres
-      DATABASE_PASSWORD: postgres
-      DATABASE_NAME: development_loan_profit_calculator
-      DATABASE_PORT: 5432
+      DATABASE_HOST: ${DATABASE_HOST:-postgres}
+      DATABASE_USER: ${DATABASE_USER:-postgres}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-postgres}
+      DATABASE_NAME: ${DATABASE_NAME:-development_loan_profit_calculator}
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
     volumes:
       - sidekiq_data:/var/lib/sidekiq/data
 
   redis:
     image: "redis:7-alpine"
     ports:
-      - 6379
+      - "6379:6379"
     volumes:
-    - ./tmp/redis_data:/var/lib/redis/data
+      - redis_data:/data

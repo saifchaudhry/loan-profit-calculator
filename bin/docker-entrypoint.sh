@@ -6,7 +6,7 @@ if [ -f tmp/pids/server.pid ]; then
 fi
 
 # No need to seed to prepare database in production/staging
-if [[ "$RAILS_ENV" == "test" ]]
+if [ "$RAILS_ENV" = "test" ]
 then
   bundle exec rake db:create 2>/dev/null
   bundle exec rake db:test:prepare 2>/dev/null
